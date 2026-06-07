@@ -74,27 +74,34 @@ with st.sidebar:
                     del st.session_state[key]
             st.rerun()
 
-# ── Page routing ──────────────────────────────────────────────────────────────
+# ── Page routing ──────────────────────────────────────────────
 page = st.session_state["current_page"]
 _dir = os.path.dirname(os.path.abspath(__file__))
-
 _g = globals()
 
+def load_page(filename):
+    with open(
+        os.path.join(_dir, "_pages", filename),
+        "r",
+        encoding="utf-8"
+    ) as f:
+        exec(f.read(), _g)
+
 if page == "🏠 Dashboard":
-    exec(open(os.path.join(_dir, "_pages", "Dashboard.py")).read(), _g)
+    load_page("Dashboard.py")
 elif page == "📚 Practice Mode":
-    exec(open(os.path.join(_dir, "_pages", "Practice.py")).read(), _g)
+    load_page("Practice.py")
 elif page == "📝 Mock Tests":
-    exec(open(os.path.join(_dir, "_pages", "Mock_Test.py")).read(), _g)
+    load_page("Mock_Test.py")
 elif page == "🏢 Company Tests":
-    exec(open(os.path.join(_dir, "_pages", "Company_Tests.py")).read(), _g)
+    load_page("Company_Tests.py")
 elif page == "🔥 Daily Challenge":
-    exec(open(os.path.join(_dir, "_pages", "Daily_Challenge.py")).read(), _g)
+    load_page("Daily_Challenge.py")
 elif page == "⚡ Speed Challenge":
-    exec(open(os.path.join(_dir, "_pages", "Speed_Challenge.py")).read(), _g)
+    load_page("Speed_Challenge.py")
 elif page == "📊 Analytics":
-    exec(open(os.path.join(_dir, "_pages", "Analytics.py")).read(), _g)
+    load_page("Analytics.py")
 elif page == "🏆 Achievements":
-    exec(open(os.path.join(_dir, "_pages", "Achievements.py")).read(), _g)
+    load_page("Achievements.py")
 elif page == "⚙️ Settings":
-    exec(open(os.path.join(_dir, "_pages", "Settings.py")).read(), _g)
+    load_page("Settings.py")
